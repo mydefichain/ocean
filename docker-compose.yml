@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  defi-blockchain:
+    image: defi/defichain:3.2.7
+    container_name: ain
+    restart: always
+    volumes:
+      - /home/username/.defi/data:/defi-data
+    command: >
+      defid
+      -printtoconsole
+      -rpcallowip=172.18.0.0/16
+      -rpcallowip=127.0.0.1
+      -rpcbind=172.18.0.2
+      -rpcbind=127.0.0.1
+      -rpcport=8554
+      -rpcuser=rpcuser
+      -rpcpassword=rpcpassword
+      -rpcworkqueue=512
+      -disablewallet=0
+      -txnotokens=0
+      -logtimemicros
+      -txindex=1
+      -acindex=1
+      -datadir=/defi-data
+    networks:
+      - ocean
+
+  defi-whale:
+    logging:
+      driver: "journald"
+      options:
+        tag: "ocean-log"
+    image: ghcr.io/jellyfishsdk/whale-api:3.30.0
+    container_name: defi-whale
+    restart: always
+    volumes:
+      - /home/username/whale-data:/leveldb
+    ports:
+      - "3000:3000"
+    depends_on:
+      - defi-blockchain
+    environment:
+      WHALE_DEFID_URL: http://rpcuser:rpcpassword@defi-blockchain:8554
+      WHALE_NETWORK: mainnet
+      WHALE_DATABASE_PROVIDER: level
+      WHALE_DATABASE_LEVEL_LOCATION: /leveldb
+      WHALE_VERSION: v0
+    networks:
+      - ocean
+networks:
+  ocean:
+    driver: bridge
+    external: true
