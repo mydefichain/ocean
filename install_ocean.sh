@@ -54,6 +54,7 @@ sudo ufw allow 80/tcp
 sudo ufw allow 8555/tcp
 sudo ufw allow 6556/tcp
 sudo ufw allow 8333/tcp
+sudo ufw allow 3000/tcp
 sudo ufw logging on
 sudo ufw -f enable
 sudo ufw status
