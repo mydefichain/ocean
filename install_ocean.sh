@@ -183,6 +183,11 @@ cd ~/
 wget http://snapshot-de.mydefichain.com/${LATEST}
 tar -xvzf ${LATEST} -C ~/.defi/data/
 
+#Latest Ocean-Snapshot
+LATESTOCEAN=$(curl http://ocean-snapshot.mydefichain.com/latest.txt)
+
+wget http://ocean-snapshot.mydefichain.com/${LATESTOCEAN}
+tar -xvzf ${LATESTOCEAN}
 
 crontab -l | { cat; echo "*/5 * * * * python3 ~/script/api_collector.py"; } | crontab -
 
