@@ -21,6 +21,7 @@ Login to your Server with SSH (Putty) as a root-User
 ```chmod 744 ./install_ocean.sh```  
 ```./install_ocean.sh USERNAME SERVERNAME DOMAIN VERSION```  
 
+---
 #### Actual Version
 
 Here you will find information about the latest version and what to look out for:
@@ -36,7 +37,6 @@ Jellyfish: https://github.com/JellyfishSDK/jellyfish/releases/latest
 
 The Script creates a user named "defichain" and your Server is reachable at http://myocean.freedomain.com  
 
----
 
 *You need a public DNS Record that points this Domain to your public IP-Address of your Server.*
 
@@ -54,7 +54,7 @@ Edit your Configuration File ~/whale/docker-compose.yml. You can use Midnight Co
 
 ```Line 5: Set actual Version of AIN
 Line 9: Change the username to the one you have chosen.
-Line 18/19: Insert rpcuser and rpcpassword (freely definable)
+Line 18/19: Insert rpcuser and rpcpassword (please use the same values as you can find in ~/.defi/defi.conf)
 Line 35: Set actual Version of Jellyfish
 Line 39: Change the username to the one you have chosen.
 Line 45: Change th RPC-URL and replace rpcuser and rpcpassword with the data from Line 18 and 19.
